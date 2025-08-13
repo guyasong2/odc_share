@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+    <title>{% block title %} ODC share {% endblock %}</title>
+</head>
+
+<body class="bg-amber-700 text-white">
+    <div id="navbar">
+        {% block navbar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Create Room</a></li>
+            <li><a href="/">Join Room</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+</body>
+</html>
