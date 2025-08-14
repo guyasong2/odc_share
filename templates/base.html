@@ -1,26 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-black text-white">
+
 <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
-    <title>{% block title %} ODC share {% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FSS{% endblock %}</title>
+    <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
 </head>
 
-<body class="bg-amber-700 text-white">
-    <div id="navbar">
-        {% block navbar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/">Create Room</a></li>
-            <li><a href="/">Join Room</a></li>
-        </ul>
-        {% endblock %}
-    </div>
+<body class="flex flex-col min-h-screen w-full">
+    <!-- Navbar-->
+    <nav class="bg-black border-b border-gray-500 sticky top-0 z-50">
+        <!-- The hidden checkbox MUST come before the dropdown and share the same parent -->
+        <input id="nav-toggle" type="checkbox" class="peer hidden" />
 
-    <div id="content">
-        {% block content %}
-        
-        {% endblock %}
-    </div>
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!--Logo -->
+                <a href="/" class="text-white text-xl font-extrabold">ODC share</a>
+
+                <!-- Desktop menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-white hover:text-orange-400">Home</a>
+                    <a href="{% url 'create_room' %}" class="text-white hover:text-orange-400">Create Room</a>
+                    <a href="{% url 'join_room' %}" class="text-white hover:text-orange-400">Join Room</a>
+                    <a href="{% url 'login' %}" class="bg-orange-500 text-white px-4 py-1 rounded">Login</a>
+                </div>
+
+                <!-- Mobile hamburger -->
+                <label for="nav-toggle" class="md:hidden cursor-pointer p-2">
+                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </label>
+            </div>
+        </div>
+
+        <!-- Mobile dropdown-->
+        <div class="hidden peer-checked:block md:hidden border-t border-gray-500 bg-black">
+            <a href="/" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Home</a>
+            <a href="{% url 'create_room' %}"
+                class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Create Room</a>
+            <a href="{% url 'join_room' %}" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-black">Join Room</a>
+            <a href="{% url 'login' %}" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Login</a>
+        </div>
+    </nav>
+
+
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-orange-500 p-4 text-center">
+        <div class="space-x-4">
+            <a href="/" class="hover:underline">Home</a>
+            <a href="{% url 'create_room' %}">Create Room</a>
+            <a href="{% url 'join_room' %}">Join Room</a>
+        </div>
+        <p class="mt-2">2025 - Works without data</p>
+    </footer>
 </body>
+
 </html>

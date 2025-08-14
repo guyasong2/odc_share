@@ -1,7 +1,23 @@
-{% extends "base.html" %}
-
-{% block title %}register{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Signup{% endblock %}
 
 {% block content %}
-<h1>Register</h1>
+<section class="flex justify-center items-center py-10">
+    <form method="POST" class="border p-8 w-full max-w-md space-y-4">
+        {% csrf_token %}
+        <h1 class="text-3xl font-bold text-center mb-4">Register</h1>
+
+        <input type="text" name="first_name" placeholder="Enter Firstname" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
+        <input type="text" name="last_name" placeholder="Enter Lastname" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
+        <input type="text" name="username" placeholder="Enter Username" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
+        <input type="password" name="password1" placeholder="Enter Password" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
+        <input type="password" name="password2" placeholder="Confirm Password" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
+
+        <button type="submit" class="bg-orange-500 w-full py-2 rounded font-semibold cursor-pointer">Register</button>
+
+        <p class="text-center text-sm mt-2">
+            Already have an account? <a href="{% url 'login' %}" class="text-orange-400">Login</a>
+        </p>
+    </form>
+</section>
 {% endblock %}

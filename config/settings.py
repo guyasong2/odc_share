@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-&941g#u+%_ujuqkcipo9f*mms7q+nf7ohbl*(*z!h*7mfu=fji
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "authentication",
     "create_room",
-    "home"
+    "home",
+    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "django.middleware.gzip.GZipMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -125,3 +129,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_DIRS = [ BASE_DIR / "static" ]
+
+MEDIA_URL = '/media/'  # URL to access media files
+MEDIA_ROOT = [ BASE_DIR / 'media']  # Folder to store uploaded files
