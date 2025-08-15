@@ -22,10 +22,14 @@
 
                 <!-- Desktop menu -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="/" class="text-white hover:text-orange-400">Home</a>
-                    <a href="{% url 'create_room' %}" class="text-white hover:text-orange-400">Create Room</a>
-                    <a href="{% url 'join_room' %}" class="text-white hover:text-orange-400">Join Room</a>
-                    <a href="{% url 'login' %}" class="bg-orange-500 text-white px-4 py-1 rounded">Login</a>
+                    <a href="/" class="text-white hover:text-orange-500">Home</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'list_rooms' %}" class="block text-white hover:text-orange-500">Rooms</a>
+                    <a href="{% url 'dashboard' %}" class="block text-white hover:text-orange-500">Dashboard</a>
+                    <a href="{% url 'logout' %}" class="bg-orange-500 px-4 py-1 rounded">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="bg-orange-500 px-4 py-1 rounded">Login / Signup</a>
+                    {% endif %}
                 </div>
 
                 <!-- Mobile hamburger -->
@@ -39,12 +43,15 @@
         </div>
 
         <!-- Mobile dropdown-->
-        <div class="hidden peer-checked:block md:hidden border-t border-gray-500 bg-black">
+        <div class="hidden peer-checked:block md:hidden border-t border-gray-500 bg-black mb-4">
             <a href="/" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Home</a>
-            <a href="{% url 'create_room' %}"
-                class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Create Room</a>
-            <a href="{% url 'join_room' %}" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-black">Join Room</a>
-            <a href="{% url 'login' %}" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Login</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'list_rooms' %}" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-white">Rooms</a>
+            <a href="{% url 'dashboard' %}" class="block px-4 py-3 text-white hover:bg-orange-500 hover:text-black">Dashboard</a>
+            <a href="{% url 'logout' %}" class="bg-orange-500 px-4 py-1 rounded ml-3 mt-3">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="bg-orange-500 px-4 py-1 rounded">Login / Signup</a>
+            {% endif %}
         </div>
     </nav>
 

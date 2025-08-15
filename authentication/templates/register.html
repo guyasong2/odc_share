@@ -3,16 +3,34 @@
 
 {% block content %}
 <section class="flex justify-center items-center py-10">
-    <form method="POST" class="border p-8 w-full max-w-md space-y-4">
+    <form method="POST" class="border p-8 w-[90%]  sm:w-[60%] max-w-md space-y-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Register</h2>
         {% csrf_token %}
-        <h1 class="text-3xl font-bold text-center mb-4">Register</h1>
 
-        <input type="text" name="first_name" placeholder="Enter Firstname" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
-        <input type="text" name="last_name" placeholder="Enter Lastname" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
-        <input type="text" name="username" placeholder="Enter Username" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
-        <input type="password" name="password1" placeholder="Enter Password" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
-        <input type="password" name="password2" placeholder="Confirm Password" class="w-full p-2 rounded bg-black border border-gray-600 text-white">
+        {# Show non-field errors only if there are any #}
+        {% if form.non_field_errors %}
+        <div class="bg-red-100 text-red-700 p-2 rounded">
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
 
+        {# Render fields manually so we can control field-specific errors #}
+        {% for field in form %}
+        <div>
+            {{ field.label_tag }}
+            {{ field }}
+
+            {% if field.errors %}
+            <div class="text-red-600 text-sm">
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
         <button type="submit" class="bg-orange-500 w-full py-2 rounded font-semibold cursor-pointer">Register</button>
 
         <p class="text-center text-sm mt-2">
