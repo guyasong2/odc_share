@@ -28,20 +28,5 @@
         </div>
     </div>
     </div>
-
-    <!-- Rooms -->
-    <h2 class="text-2xl font-bold mb-2">Rooms Available</h2>
-    <hr class="text-orange-400 max-w-[8%] mx-auto mb-8 border-1">
-    <div class="max-w-[80%] mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 px-4">
-        {% for room in rooms %}
-        <div class="border-2 p-4 text-center hover:shadow-lg transition">
-            <div class="bg-gray-300 h-32 mb-3"></div>
-            <h3 class="font-semibold">{{ room.name }}</h3>
-            <a href="/" class="bg-orange-500 text-white px-3 py-1 mt-2 inline-block rounded">Join Room</a>
-        </div>
-        {% endfor %}
-    </div>
-    </div>
 </section>
 {% endblock %}

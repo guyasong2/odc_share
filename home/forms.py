@@ -1,28 +1,26 @@
 from django import forms
-from .models import Room, RoomParticipant
+from .models import Room
+
 
 class RoomForm(forms.ModelForm):
-    password = forms.CharField(
-        required=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Optional password for private rooms'})
-    )
-
     class Meta:
         model = Room
-        fields = ['name', 'description', 'max_participants', 'is_private', 'password']
+        fields = ["room_name", "description"]
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Room name'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Describe your room', 'rows': 3}),
-            'max_participants': forms.NumberInput(attrs={'min': 2}),
-            'is_private': forms.CheckboxInput(),
+            "room_name": forms.TextInput(attrs={
+                "class": "w-full border border-gray-300 rounded-lg p-2",
+                "placeholder": "Enter room name..."
+            }),
+            "description": forms.TextInput(attrs={
+                "class": "w-full border border-gray-300 rounded-lg p-2",
+                "placeholder": "Enter description"
+            })
         }
 
-class JoinRoomForm(forms.ModelForm):
-    password = forms.CharField(
-        required=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Enter room password if required'})
-    )
 
-    class Meta:
-        model = RoomParticipant
-        fields = ['user']  # room will be selected in the view
+class JoinRoomForm(forms.Form):
+    code = forms.CharField(
+        max_length=8,
+        widget=forms.TextInput(attrs={"class": "w-full border border-gray-300 rounded-lg p-2",
+            "placeholder": "Enter room code..."})
+    )

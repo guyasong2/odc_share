@@ -1,11 +1,9 @@
 from django.contrib import admin
-from home.models import Room, RoomParticipant
+from home.models import Room
 
 # Register your models here.
-class createRoomAdmin(admin.ModelAdmin):
-    list_display = ["name", "created_at"]
-admin.site.register(Room, createRoomAdmin)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ["room_name", "created_by", "created_at", "code"]
 
-class RoomParticipantAdmin(admin.ModelAdmin):
-    list_display = ["room", "user"]
-admin.site.register(RoomParticipant, RoomParticipantAdmin)
+admin.site.register(Room, RoomAdmin)
+

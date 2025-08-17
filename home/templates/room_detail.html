@@ -1,15 +1,67 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% block content %}
-<div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-    <h2 class="text-2xl font-bold mb-4">{{ room.name }}</h2>
-    <p class="mb-4">{{ room.description }}</p>
-    <h3 class="text-xl font-semibold mb-2">Participants:</h3>
-    <ul class="list-disc list-inside">
-        {% for participant in participants %}
-        <li>{{ participant.user.username }} {% if participant.is_admin %}(Admin){% endif %}</li>
-        {% empty %}
-        <li>No participants yet.</li>
-        {% endfor %}
-    </ul>
+<div class="w-[96%] sm:w-[60%] mx-auto mt-10 p-4 rounded-2xl shadow-lg">
+    <!-- Room Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 mb-6">
+        <!-- Room Info -->
+        <div class="mb-4 sm:mb-0">
+            <h1 class="text-2xl font-bold text-white">{{ rooms.room_name }}</h1>
+            <p>Room code: <span class="text-orange-400">{{rooms.code}}</span></p>
+            <p class="text-sm text-gray-500">
+                Created by <span class="font-medium text-orange-600">{{ request.user.username }}</span>
+                • {{ rooms.created_at|date:"M d, Y" }}
+            </p>
+        </div>
+
+        <!-- Back Button -->
+        <a href="/"
+            class="px-3 py-1 text-xs sm:text-sm bg-orange-600 text-white rounded hover:bg-orange-500 transition sm:self-start">
+            ← Back to Rooms
+        </a>
+    </div>
+
+
+    <!-- Room Description -->
+    <div class="mb-6">
+        <p class="text-gray-700">{{ room.description|default:"No description available." }}</p>
+    </div>
+
+    <!-- Admin Upload Section -->
+    {% if user == rooms.created_by %}
+    <div class="mb-8  p-4 rounded-xl border border-gray-200">
+        <h2 class="text-lg font-semibold text-gray-800 mb-3">📂 Share a File</h2>
+        <form method="post" enctype="multipart/form-data" class="flex items-center space-x-3">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                Upload File
+            </button>
+        </form>
+    </div>
+    {% endif %}
+
+    <!-- Files Section -->
+    <div>
+        <h2 class="text-lg font-semibold text-white mb-3">📁 Shared Files</h2>
+        {% if files %}
+        <ul class="space-y-3">
+            {% for file in files %}
+            <li class="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                <div class="flex items-center space-x-3">
+                    <span class="text-orange-600">⬇️</span>
+                    <span class="text-gray-700 font-medium"></span>
+                </div>
+                <a href="{{ file.file.url }}" download
+                    class="px-3 py-1 bg-black text-white rounded-lg hover:bg-gray-800">
+                    Download
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-500 italic">No files shared yet.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
