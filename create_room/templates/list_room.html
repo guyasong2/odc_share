@@ -4,19 +4,25 @@
 
 {% block content %}
 <h2 class="text-2xl font-bold mb-2 text-center mt-10">Rooms Available</h2>
-    <hr class="text-orange-400 max-w-[8%] mx-auto mb-8 border-1">
+
+    <hr class="text-orange-500 max-w-[8%] mx-auto mb-8 border-1"> <!--Underline-->
+
     <div class="max-w-[80%] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 px-4">
+
         {% for room in rooms %}
         <div class="border-2 p-4 text-center hover:shadow-lg transition mb-10">
             <div class="bg-gray-300 h-32 mb-3"></div>
             <h3 class="font-semibold">{{ room.room_name }}</h3>
             <p class="text-sm">{{room.description}}</p>
-            <a href="/" class="bg-orange-500 text-white px-3 py-1 mt-2 inline-block rounded ">Join Room</a>
+
+            <a href="{{room.code}}" class="bg-orange-500 text-white px-3 py-1 mt-2 inline-block rounded ">Join Room</a>
+
         </div>
         {% endfor %}
+
     </div>
     </div>
 {% endblock %}
 
-type="submit" name="join_room"
+type="submit" name="join_room
