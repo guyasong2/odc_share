@@ -1,3 +1,5 @@
+<!--Room Details.html-->
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -9,7 +11,7 @@
             <h1 class="text-2xl font-bold text-white">{{ rooms.room_name }}</h1>
             <p>Room code: <span class="text-orange-400">{{rooms.code}}</span></p>
             <p class="text-sm text-gray-500">
-                Created by <span class="font-medium text-orange-600">{{ request.user.username }}</span>
+                Created by <span class="font-medium text-orange-600">{{ rooms.created_by }}</span>
                 • {{ rooms.created_at|date:"M d, Y" }}
             </p>
         </div>
@@ -34,9 +36,10 @@
         <form method="post" enctype="multipart/form-data" class="flex items-center space-x-3">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+            <!-- <button type="file" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
                 Upload File
-            </button>
+            </button> -->
+            <input type="file" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
         </form>
     </div>
     {% endif %}
@@ -61,8 +64,11 @@
         </ul>
         {% else %}
         <p class="text-gray-500 italic">No files shared yet.</p>
+        
         {% endif %}
     </div>
 </div>
-{% endblock %}
+{% endblock %} 
 
+
+ 

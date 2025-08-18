@@ -22,17 +22,21 @@
 
     <!-- Navbar-->
     <nav class="bg-black border-b border-gray-500 sticky top-0 z-50">
+
         <!-- The hidden checkbox MUST come before the dropdown and share the same parent -->
         <input id="nav-toggle" type="checkbox" class="peer hidden" />
 
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
+
                 <!--Logo -->
-                <a href="/" class="text-white text-xl font-extrabold">ODC share</a>
+                <a href="/" class="text-white text-xl font-extrabold">ODC share: {{user.username}}</a>
 
                 <!-- Desktop menu -->
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="/" class="text-white hover:text-orange-500">Home</a>
+
+                    
                     {% if user.is_authenticated %}
                     <a href="{% url 'list_rooms' %}" class="block text-white hover:text-orange-500">Rooms</a>
                     <a href="{% url 'dashboard' %}" class="block text-white hover:text-orange-500">Dashboard</a>
@@ -85,6 +89,7 @@
             <a href="{% url 'login' %}" class="bg-orange-500 px-4 py-1 rounded">Login / Signup</a>
             {% endif %}
         </div>
+
         <p class="mt-2">2025 - Works without data</p>
     </footer>
 </body>

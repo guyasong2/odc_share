@@ -1,5 +1,6 @@
 from django import forms
 from .models import Room
+import random
 
 
 class RoomForm(forms.ModelForm):
@@ -11,6 +12,7 @@ class RoomForm(forms.ModelForm):
                 "class": "w-full border border-gray-300 rounded-lg p-2",
                 "placeholder": "Enter room name..."
             }),
+
             "description": forms.TextInput(attrs={
                 "class": "w-full border border-gray-300 rounded-lg p-2",
                 "placeholder": "Enter description"
