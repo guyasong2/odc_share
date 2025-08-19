@@ -38,6 +38,12 @@
             You don't have an Account? <a href="{% url 'register' %}" class="text-orange-400">Register</a><br>
             Forgotten your password? <a href="/" class="text-orange-400">Reset Here</a>
         </p>
+        <p class="mt-4 text-center text-sm">
+            <a href="{% url 'password_reset' %}" class="text-orange-600 hover:underline">
+                Forgot Password?
+            </a>
+        </p>
+
     </form>
 </section>
 {% endblock %}

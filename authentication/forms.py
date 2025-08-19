@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -26,3 +26,11 @@ class LoginForm(AuthenticationForm):
         super().__init__(request, *args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': 'w-full p-2 border rounded', 'placeholder': 'Username'})
         self.fields['password'].widget.attrs.update({'class': 'w-full p-2 border rounded', 'placeholder': 'Password'})
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            "class": "w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500",
+            "placeholder": "Enter your email"
+        })
+    )

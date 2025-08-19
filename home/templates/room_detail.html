@@ -10,7 +10,7 @@
             <p>Room code: <span class="text-orange-400">{{room.code}}</span></p>
             <p class="text-sm text-gray-500">
                 Created by <span class="font-medium text-orange-600">{{ request.user.username }}</span>
-                • {{ rooms.created_at|date:"M d, Y" }}
+                • {{ room.created_at|date:"M d, Y" }}
             </p>
         </div>
 

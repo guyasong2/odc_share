@@ -865,6 +865,9 @@
   .text-green-400 {
     color: var(--color-green-400);
   }
+  .text-green-600 {
+    color: var(--color-green-600);
+  }
   .text-green-700 {
     color: var(--color-green-700);
   }
