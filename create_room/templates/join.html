@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Join Room | Room number {{room.id}}{% endblock %}
+
+{% block content %}
+<section class="w-[90%] sm:w-[30%] mx-auto mt-10">
+  <div class="w-[50%] sm:w-96 mx-auto p-6 border border-gray-700">
+    <h2 class="text-2xl font-bold mb-4 text-center">Join Room: <span class="text-orange-400">{{ room.room_name }}</span></h2>
+    
+    {% if error %}
+      <p class="text-red-500 text-center mb-3">{{ error }}</p>
+    {% endif %}
+    
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <input 
+        type="text" 
+        name="room_code" 
+        placeholder="Enter Room Code" 
+        class="w-full px-4 py-2 rounded-xl border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+      >
+      <button 
+        type="submit" 
+        class="w-full bg-orange-400 text-black font-semibold py-2 rounded-xl hover:bg-orange-500 transition-colors cursor-pointer"
+      >
+        Join Room
+      </button>
+    </form>
+  </div>
+</section>
+{% endblock %}

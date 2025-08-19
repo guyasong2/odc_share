@@ -20,7 +20,7 @@ def dashboard(request):
                 room = create_form.save(commit=False)
                 room.created_by = request.user
                 room.save()
-                return redirect("room_detail", code=room.code)
+                return redirect('room_detail_by_code', code=room.code)
 
         elif "join_room" in request.POST:
             join_form = JoinRoomForm(request.POST)
@@ -31,7 +31,7 @@ def dashboard(request):
                     room.members.add(request.user)
                 except Room.DoesNotExist:
                     join_form.add_error("code", "Room not found")
-                return redirect("room_detail", code=room.code)
+                return redirect('room_detail_by_code', code=room.code)
 
     return render(request, "dashboard.html", {
         "create_form": create_form,
@@ -39,6 +39,10 @@ def dashboard(request):
     })
 
 @login_required
-def room_detail(request, code):
-    rooms = get_object_or_404(Room, code=code)
-    return render(request, "room_detail.html", {"rooms": rooms})
+def room_details(request, room_id):  # must accept room_id
+    room = get_object_or_404(Room, id=room_id)
+    return render(request, 'room_detail.html', {'room': room})
+
+def room_detail(request, code): 
+    room = get_object_or_404(Room, code=code)
+    return render(request, 'room_detail.html', {'room': room})
