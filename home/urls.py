@@ -9,4 +9,5 @@ urlpatterns = [
     path("join/", views.dashboard, name="join_room"),  
     path("room/id/<int:room_id>/", views.room_details, name="room_detail_by_id"),
     path("room/code/<str:code>/", views.room_detail, name="room_detail_by_code"),
+    path("about/", views.about, name="about"),
 ]
