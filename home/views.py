@@ -46,3 +46,7 @@ def room_details(request, room_id):  # must accept room_id
 def room_detail(request, code): 
     room = get_object_or_404(Room, code=code)
     return render(request, 'room_detail.html', {'room': room})
+
+
+def about(request):
+    return render(request, "about.html")
