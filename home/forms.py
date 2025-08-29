@@ -1,5 +1,5 @@
 from django import forms
-from .models import Room
+from .models import Room, SharedFile
 
 
 class RoomForm(forms.ModelForm):
@@ -24,3 +24,12 @@ class JoinRoomForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "w-full border border-gray-300 rounded-lg p-2",
             "placeholder": "Enter room code..."})
     )
+
+
+class SharedFileForm(forms.ModelForm):
+    class Meta:
+        model = SharedFile
+        fields = ['file']
+        widgets = {
+            'file': forms.ClearableFileInput(attrs={'class': 'border rounded-lg p-2 w-full mb-3 sm:mb-3 md:mb-3 '})
+        }

@@ -17,3 +17,14 @@ class Room(models.Model):
 
     def __str__(self):
         return f"{self.room_name}"
+    
+class SharedFile(models.Model):
+    room = models.ForeignKey(Room, related_name="files", on_delete=models.CASCADE)
+    file = models.FileField(upload_to="Room Files/")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.file.name
+
+

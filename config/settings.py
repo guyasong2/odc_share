@@ -132,7 +132,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_DIRS = [ BASE_DIR / "static" ]
 
 MEDIA_URL = '/media/'  # URL to access media files
-MEDIA_ROOT = [ BASE_DIR / 'media']  # Folder to store uploaded files
+MEDIA_ROOT = BASE_DIR / 'media'  # Folder to store uploaded files
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 

@@ -1,0 +1,15 @@
+Task: Check if jobdoorway is vulnerable to XSS(Cross Site Scripting)
+
+Tools used 
+----------
+-nmap
+-Owasp vulnerability scanner (zaproxy)
+-Metasploit
+
+
+-Scan for open ports
+-Tested to see if i could hack through the open ports with Metasploit 
+-used zaproxy scan the entire website for vulnerabilities 
+-Scanned the network manually 
+    -inserted the URL of jobdoorway
+    

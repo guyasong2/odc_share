@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from home.models import Room
-from home.forms import RoomForm, JoinRoomForm
+from home.forms import RoomForm, JoinRoomForm, SharedFileForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -41,11 +41,53 @@ def dashboard(request):
 @login_required
 def room_details(request, room_id):  # must accept room_id
     room = get_object_or_404(Room, id=room_id)
-    return render(request, 'room_detail.html', {'room': room})
+    files = room.files.all()
+
+    # Only admin can upload
+    if request.user == room.created_by:
+        if request.method == "POST":
+            form = SharedFileForm(request.POST, request.FILES)
+            if form.is_valid():
+                shared_file = form.save(commit=False)
+                shared_file.room = room
+                shared_file.uploaded_by = request.user
+                shared_file.save()
+                return redirect("room_detail_by_id", room_id=room.id)
+        else:
+            form = SharedFileForm()
+    else:
+        form = None
+
+    return render(request, "room_detail.html", {
+        "room": room,
+        "files": files,
+        "form": form
+    })
 
 def room_detail(request, code): 
     room = get_object_or_404(Room, code=code)
-    return render(request, 'room_detail.html', {'room': room})
+    files = room.files.all()
+
+    # Only admin can upload
+    if request.user == room.created_by:
+        if request.method == "POST":
+            form = SharedFileForm(request.POST, request.FILES)
+            if form.is_valid():
+                shared_file = form.save(commit=False)
+                shared_file.room = room
+                shared_file.uploaded_by = request.user
+                shared_file.save()
+                return redirect("room_detail_by_code", code=room.code)
+        else:
+            form = SharedFileForm()
+    else:
+        form = None
+
+    return render(request, "room_detail.html", {
+        "room": room,
+        "files": files,
+        "form": form
+    })
 
 
 def about(request):
