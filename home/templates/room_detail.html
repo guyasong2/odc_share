@@ -9,7 +9,7 @@
             <h1 class="text-2xl font-bold text-white">{{ room.room_name }}</h1>
             <p>Room code: <span class="text-orange-400">{{room.code}}</span></p>
             <p class="text-sm text-gray-500">
-                Created by <span class="font-medium text-orange-600">{{ request.user.username }}</span>
+                Created by <span class="font-medium text-orange-600">{{ room.created_by }}</span>
                 • {{ room.created_at|date:"M d, Y" }}
             </p>
         </div>
@@ -34,7 +34,7 @@
         <form method="post" enctype="multipart/form-data" class="items-center space-x-3 block sm:flex md:flex ">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="w-full sm:w-[20%] bg-orange-500 text-white px-2 py-2 rounded hover:bg-orange-600">
+            <button type="submit" class="w-full sm:w-[30%] bg-orange-500 text-white px-2 py-2 rounded hover:bg-orange-600">
                 Upload File
             </button>
         </form>
