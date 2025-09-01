@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from home.models import Room
+from django.contrib.auth.models import User
 from home.forms import RoomForm, JoinRoomForm
 from django.contrib.auth.decorators import login_required
 
 
 def home(request):
     rooms = Room.objects.all()
-    return render(request, "home.html", {"rooms":rooms})
+    users = User.objects.all()
+    context = {
+        'rooms':rooms,
+        'users':users,
+    }
+    return render(request, "home.html", context)
 
 @login_required
 def dashboard(request):

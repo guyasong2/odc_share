@@ -9,7 +9,8 @@ class Room(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rooms", null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     members = models.ManyToManyField(User, related_name="joined_rooms", blank=True)
-
+    # is_public = models.BooleanField(default=False)
+    
     def save(self, *args, **kwargs):
         if not self.code:
             self.code = str(uuid.uuid4())[:6].upper()
